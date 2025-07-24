@@ -1,59 +1,76 @@
-# data-studio
+# Buddhilive Data Studio
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.6.
+Buddhilive Data Studio is a RAG (Retrieval-Augmented Generation) powered chatbot that allows you to chat with your documents and WordPress data. It uses Streamlit for the user interface, ChromaDB for the vector store, Sentence Transformers for embeddings, and smollm for text generation.
 
-## Development server
+## Features
 
-To start a local development server, run:
+-   **Document Upload**: Upload and vectorize PDF, DOCX, and TXT files.
+-   **WordPress Integration**: Ingest data from WordPress XML exports or SQL dumps.
+-   **Chat Interface**: Ask questions and get answers from your data.
+-   **Open Source**: Built with open-source models and libraries.
 
-```bash
-ng serve
-```
+## How to Use
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+### 1. Environment Setup
 
-## Code scaffolding
+It is recommended to use a virtual environment to manage the dependencies for this project.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+**Create a virtual environment:**
 
 ```bash
-ng generate --help
+python -m venv dojo
 ```
 
-## Building
+**Activate the virtual environment:**
 
-To build the project run:
+-   On Windows:
+    ```bash
+    dojo\Scripts\activate
+    ```
+-   On macOS and Linux:
+    ```bash
+    source dojo/bin/activate
+    ```
+
+### 2. Install Dependencies
+
+With your virtual environment activated, install the required Python packages using the `requirements.txt` file:
 
 ```bash
-ng build
+pip install -r requirements.txt
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Note: The `langchain` library has been modularized. This project uses `langchain-community` for vector store access. The `requirements.txt` file includes this dependency.
 
-## Running unit tests
+### 3. Setting up Ollama
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+This application uses Ollama to run the `smollm` language model locally. You need to have Ollama installed and the `smollm` model pulled before running the application.
+
+1.  **Install Ollama**: Follow the instructions on the [Ollama website](https://ollama.ai/) to download and install it on your system.
+
+2.  **Pull the `smollm` model**: Once Ollama is installed and running, open your terminal and run the following command to download the `smollm` model:
+    ```bash
+    ollama pull smollm
+    ```
+
+3.  **Ensure Ollama is running**: Make sure the Ollama application is running in the background before you start the Streamlit app.
+
+### 4. Running the Application
+
+Once the dependencies are installed, you can run the Streamlit application with the following command:
 
 ```bash
-ng test
+streamlit run app.py
 ```
 
-## Running end-to-end tests
+This will open the Buddhilive Data Studio in your web browser.
 
-For end-to-end (e2e) testing, run:
+### 4. Using the App
 
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+-   **Data Ingestion**:
+    -   Use the sidebar to upload your documents (PDF, DOCX, TXT) and click "Vectorize Documents".
+    -   Alternatively, upload a WordPress XML export or SQL dump and click the corresponding "Vectorize" button.
+    -   The app will process the files and store the vector embeddings in a local Chroma database (`data/chroma_db`).
+-   **Chatting with your Data**:
+    -   Once your data has been vectorized, you can start asking questions in the chat interface.
+    -   The chatbot will use the information from your documents to provide relevant answers.
