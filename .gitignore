@@ -1,0 +1,20 @@
+# Virtual Environment
+dojo/
+venv/
+*.venv
+
+# Data and Databases
+data/
+*.db
+*.sqlite3
+
+# Python Caches
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# IDE and Editor specific
+.vscode/
+.idea/
+.env
