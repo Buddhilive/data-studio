@@ -52,7 +52,7 @@ def get_llm():
         api_key = get_api_key()
         if not api_key:
             st.error("Google API key not found. Please enter your API key in the sidebar.")
-            st.info("To get an API key, visit: https://makersuite.google.com/app/apikey")
+            st.info("To get an API key, visit: https://aistudio.google.com/app/apikey")
             return None
         
         # Configure the API key
@@ -60,15 +60,15 @@ def get_llm():
         
         # Initialize the Gemini model
         llm = ChatGoogleGenerativeAI(
-            model="gemini-1.5-flash",
+            model="gemini-2.5-flash-lite",
             temperature=0.7,
-            max_tokens=512,
+            max_tokens=1512,
             timeout=60,
             max_retries=2,
             google_api_key=api_key
         )
         
-        st.success("Gemini API connected successfully!")
+        ## st.success("Gemini API connected successfully!")
         return llm
         
     except Exception as e:
@@ -242,7 +242,7 @@ with st.sidebar.expander("🔑 API Configuration", expanded=not current_api_key)
         "Enter your Google API Key:",
         type="password",
         value=current_api_key if current_api_key else "",
-        help="Get your API key from https://makersuite.google.com/app/apikey",
+        help="Get your API key from https://aistudio.google.com/app/apikey",
         key="api_key_input"
     )
     
@@ -255,7 +255,7 @@ with st.sidebar.expander("🔑 API Configuration", expanded=not current_api_key)
     
     if not current_api_key:
         st.warning("⚠️ Please enter your Google API key to use the chatbot.")
-        st.markdown("[Get your free API key here](https://makersuite.google.com/app/apikey)")
+        st.markdown("[Get your free API key here](https://aistudio.google.com/app/apikey)")
 
 st.sidebar.title("Data Ingestion")
 
